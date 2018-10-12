@@ -1,46 +1,49 @@
 import 'package:flutter/material.dart';
 import '../widgets/cat.dart';
 
-class Home extends StatefulWidget{
-
+class Home extends StatefulWidget {
   State<Home> createState() => HomeState();
-
 }
 
-class HomeState extends State<Home> with TickerProviderStateMixin{
+class HomeState extends State<Home> with TickerProviderStateMixin {
   Animation<double> catAnimation;
   AnimationController catController;
-
+  bool isTop = true;
 
   @override
   void initState() {
     super.initState();
-    catController = AnimationController(
-        duration: Duration(seconds: 2),
-        vsync: this
-    );
+    catController =
+        AnimationController(duration: Duration(seconds: 2), vsync: this);
 
-    catAnimation = Tween(begin: 0.0, end: 100.0).animate(
-      CurvedAnimation(
-          parent: catController ,
-          curve: Curves.easeIn
-      )
-    );
+    catAnimation = Tween(begin: 0.0, end: 100.0)
+        .animate(CurvedAnimation(parent: catController, curve: Curves.easeIn));
+  }
 
-    catController.forward();
+  onTap() {
+    if (catController.status == AnimationStatus.completed) {
+      catController.reverse();
+    } else {
+      catController.forward();
+    }
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Anim Bird"),),
-      body: buildAnimation(),
+      appBar: AppBar(
+        title: Text("Anim Bird"),
+      ),
+      body: GestureDetector(
+        child: buildCatAnimation(),
+        onTap: onTap,
+      ),
     );
   }
 
-  Widget buildAnimation() {
+  Widget buildCatAnimation() {
     return AnimatedBuilder(
       animation: catAnimation,
-      builder: (context, child){
+      builder: (context, child) {
         return Container(
           child: child,
           margin: EdgeInsets.only(top: catAnimation.value),
@@ -49,6 +52,5 @@ class HomeState extends State<Home> with TickerProviderStateMixin{
       child: Cat(),
     );
   }
-
 
 }
