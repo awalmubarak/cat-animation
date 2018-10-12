@@ -53,4 +53,11 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
     );
   }
 
+  Widget buildBox() {
+    return Container(
+      color: Colors.brown,
+      height: 200.0,
+      width: 200.0,
+    );
+  }
 }
