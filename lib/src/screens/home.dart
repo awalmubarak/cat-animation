@@ -23,10 +23,10 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
       CurvedAnimation(parent: boxController, curve: Curves.easeInOut),
     );
 
-    boxController.addStatusListener((status){
-      if(status==AnimationStatus.completed){
+    boxController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
         boxController.reverse();
-      }else if(status == AnimationStatus.dismissed){
+      } else if (status == AnimationStatus.dismissed) {
         boxController.forward();
       }
     });
@@ -115,7 +115,6 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
       ),
     );
   }
-
 
   Widget buildRightFlap() {
     return Positioned(
