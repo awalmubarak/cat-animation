@@ -34,7 +34,14 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
         title: Text("Anim Bird"),
       ),
       body: GestureDetector(
-        child: buildCatAnimation(),
+        child: Center(
+          child: Stack(
+            children: <Widget>[
+              buildCatAnimation(),
+              buildBox()
+            ],
+          ),
+        ),
         onTap: onTap,
       ),
     );
